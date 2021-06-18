@@ -1,13 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
+import Login from '@pages/Auth/Login'
+import { SnackbarProvider } from 'notistack';
+import PrivateRoute from '@pages/PrivateRoute'
+import Worksheet from '@pages/SecurePages/Worksheet'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <SnackbarProvider maxSnack={1} anchorOrigin={{
+    vertical: 'top',
+    horizontal: 'center',
+  }}>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Login} />
+        <PrivateRoute path="/worksheet" component={Worksheet} />
+      </Switch>
+    </Router>
+  </SnackbarProvider>,
   document.getElementById('root')
 );
 
